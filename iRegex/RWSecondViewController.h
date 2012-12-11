@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RWSecondViewController : UIViewController
+@interface RWSecondViewController : UITableViewController
 
 @end

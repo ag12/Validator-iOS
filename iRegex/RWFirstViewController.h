@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 Razeware LLC. All rights reserved.
 //
 
+
+#import "RWSearchViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface RWFirstViewController : UIViewController
+@interface RWFirstViewController : UIViewController <RWSearchViewControllerDelegate>
 
 @end

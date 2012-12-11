@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D41E7891676DF46001199BA /* RWSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41E7881676DF46001199BA /* RWSearchViewController.m */; };
 		6DA5B5CB166AA5780007B2A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CA166AA5780007B2A5 /* UIKit.framework */; };
 		6DA5B5CD166AA5780007B2A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CC166AA5780007B2A5 /* Foundation.framework */; };
 		6DA5B5CF166AA5780007B2A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CE166AA5780007B2A5 /* CoreGraphics.framework */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D41E7871676DF46001199BA /* RWSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWSearchViewController.h; sourceTree = "<group>"; };
+		6D41E7881676DF46001199BA /* RWSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWSearchViewController.m; sourceTree = "<group>"; };
 		6DA5B5C6166AA5780007B2A5 /* iRegex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRegex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA5B5CA166AA5780007B2A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6DA5B5CC166AA5780007B2A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -99,6 +102,8 @@
 				6DA5B5E2166AA5780007B2A5 /* MainStoryboard.storyboard */,
 				6DA5B5E5166AA5780007B2A5 /* RWFirstViewController.h */,
 				6DA5B5E6166AA5780007B2A5 /* RWFirstViewController.m */,
+				6D41E7871676DF46001199BA /* RWSearchViewController.h */,
+				6D41E7881676DF46001199BA /* RWSearchViewController.m */,
 				6DA5B5E8166AA5780007B2A5 /* first.png */,
 				6DA5B5EA166AA5780007B2A5 /* first@2x.png */,
 				6DA5B5EC166AA5780007B2A5 /* RWSecondViewController.h */,
@@ -199,6 +204,7 @@
 				6DA5B5DB166AA5780007B2A5 /* RWAppDelegate.m in Sources */,
 				6DA5B5E7166AA5780007B2A5 /* RWFirstViewController.m in Sources */,
 				6DA5B5EE166AA5780007B2A5 /* RWSecondViewController.m in Sources */,
+				6D41E7891676DF46001199BA /* RWSearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +321,7 @@
 				6DA5B5F7166AA5780007B2A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
