@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6D41E7891676DF46001199BA /* RWSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41E7881676DF46001199BA /* RWSearchViewController.m */; };
+		6D41E790167829A6001199BA /* exclamation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E78F167829A6001199BA /* exclamation@2x.png */; };
+		6D41E792167829B1001199BA /* exclamation.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E791167829B1001199BA /* exclamation.png */; };
+		6D41E79516782CE5001199BA /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E79316782CE5001199BA /* checkmark.png */; };
+		6D41E79616782CE5001199BA /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E79416782CE5001199BA /* checkmark@2x.png */; };
 		6DA5B5CB166AA5780007B2A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CA166AA5780007B2A5 /* UIKit.framework */; };
 		6DA5B5CD166AA5780007B2A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CC166AA5780007B2A5 /* Foundation.framework */; };
 		6DA5B5CF166AA5780007B2A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CE166AA5780007B2A5 /* CoreGraphics.framework */; };
@@ -29,6 +33,10 @@
 /* Begin PBXFileReference section */
 		6D41E7871676DF46001199BA /* RWSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWSearchViewController.h; sourceTree = "<group>"; };
 		6D41E7881676DF46001199BA /* RWSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWSearchViewController.m; sourceTree = "<group>"; };
+		6D41E78F167829A6001199BA /* exclamation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exclamation@2x.png"; sourceTree = "<group>"; };
+		6D41E791167829B1001199BA /* exclamation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exclamation.png; sourceTree = "<group>"; };
+		6D41E79316782CE5001199BA /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
+		6D41E79416782CE5001199BA /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
 		6DA5B5C6166AA5780007B2A5 /* iRegex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRegex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA5B5CA166AA5780007B2A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6DA5B5CC166AA5780007B2A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,6 +118,10 @@
 				6DA5B5ED166AA5780007B2A5 /* RWSecondViewController.m */,
 				6DA5B5EF166AA5780007B2A5 /* second.png */,
 				6DA5B5F1166AA5780007B2A5 /* second@2x.png */,
+				6D41E78F167829A6001199BA /* exclamation@2x.png */,
+				6D41E791167829B1001199BA /* exclamation.png */,
+				6D41E79316782CE5001199BA /* checkmark.png */,
+				6D41E79416782CE5001199BA /* checkmark@2x.png */,
 				6DA5B5D1166AA5780007B2A5 /* Supporting Files */,
 			);
 			path = iRegex;
@@ -190,6 +202,10 @@
 				6DA5B5EB166AA5780007B2A5 /* first@2x.png in Resources */,
 				6DA5B5F0166AA5780007B2A5 /* second.png in Resources */,
 				6DA5B5F2166AA5780007B2A5 /* second@2x.png in Resources */,
+				6D41E790167829A6001199BA /* exclamation@2x.png in Resources */,
+				6D41E792167829B1001199BA /* exclamation.png in Resources */,
+				6D41E79516782CE5001199BA /* checkmark.png in Resources */,
+				6D41E79616782CE5001199BA /* checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
