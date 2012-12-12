@@ -12,6 +12,8 @@
 		6D41E792167829B1001199BA /* exclamation.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E791167829B1001199BA /* exclamation.png */; };
 		6D41E79516782CE5001199BA /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E79316782CE5001199BA /* checkmark.png */; };
 		6D41E79616782CE5001199BA /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E79416782CE5001199BA /* checkmark@2x.png */; };
+		6D41E799167837C9001199BA /* RWIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E797167837C9001199BA /* RWIcon.png */; };
+		6D41E79A167837C9001199BA /* RWIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D41E798167837C9001199BA /* RWIcon@2x.png */; };
 		6DA5B5CB166AA5780007B2A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CA166AA5780007B2A5 /* UIKit.framework */; };
 		6DA5B5CD166AA5780007B2A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CC166AA5780007B2A5 /* Foundation.framework */; };
 		6DA5B5CF166AA5780007B2A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA5B5CE166AA5780007B2A5 /* CoreGraphics.framework */; };
@@ -37,6 +39,8 @@
 		6D41E791167829B1001199BA /* exclamation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exclamation.png; sourceTree = "<group>"; };
 		6D41E79316782CE5001199BA /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		6D41E79416782CE5001199BA /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
+		6D41E797167837C9001199BA /* RWIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RWIcon.png; sourceTree = "<group>"; };
+		6D41E798167837C9001199BA /* RWIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RWIcon@2x.png"; sourceTree = "<group>"; };
 		6DA5B5C6166AA5780007B2A5 /* iRegex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRegex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA5B5CA166AA5780007B2A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6DA5B5CC166AA5780007B2A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -78,6 +82,8 @@
 		6DA5B5BB166AA5780007B2A5 = {
 			isa = PBXGroup;
 			children = (
+				6D41E797167837C9001199BA /* RWIcon.png */,
+				6D41E798167837C9001199BA /* RWIcon@2x.png */,
 				6DA5B5D0166AA5780007B2A5 /* iRegex */,
 				6DA5B5C9166AA5780007B2A5 /* Frameworks */,
 				6DA5B5C7166AA5780007B2A5 /* Products */,
@@ -206,6 +212,8 @@
 				6D41E792167829B1001199BA /* exclamation.png in Resources */,
 				6D41E79516782CE5001199BA /* checkmark.png in Resources */,
 				6D41E79616782CE5001199BA /* checkmark@2x.png in Resources */,
+				6D41E799167837C9001199BA /* RWIcon.png in Resources */,
+				6D41E79A167837C9001199BA /* RWIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
