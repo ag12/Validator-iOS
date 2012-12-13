@@ -75,7 +75,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="coU-gq-juC"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="70D-My-TPx" id="KCE-LT-1sS"/>
                                                     </connections>
@@ -101,7 +101,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="vpD-fT-sdw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="70D-My-TPx" id="J0P-iE-Ezw"/>
                                                     </connections>
@@ -127,7 +127,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="1oc-Fw-DLT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="70D-My-TPx" id="cSY-qo-yEg"/>
                                                     </connections>
@@ -153,7 +153,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="FpO-wl-FlC"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="70D-My-TPx" id="vs9-tO-pvC"/>
                                                     </connections>
@@ -179,7 +179,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="rMO-YZ-FnD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="70D-My-TPx" id="dhD-q2-om3"/>
                                                     </connections>
@@ -261,7 +261,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="LvX-0S-xYd"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="70D-My-TPx" id="c1N-Rc-AB5"/>
                                                     </connections>
