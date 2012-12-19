@@ -11,6 +11,8 @@
 
 @interface RWSearchViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+@property (weak, nonatomic) IBOutlet UISwitch *caseSensitiveSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *wholeWordsSwitch;
 @property (strong, nonatomic) NSMutableDictionary *options;
 @end
 
@@ -27,7 +29,30 @@
         // Pop the keyboard if there is no previous search string
         [self.searchTextField becomeFirstResponder];
     }
-    self.options = self.searchOptions.mutableCopy;
+    
+    if (self.searchOptions)
+    {
+        // Adjust based on the last search options
+        self.options = self.searchOptions.mutableCopy;
+        
+        BOOL isCaseSensitive = [[self.options objectForKey:kRWSearchCaseSensitiveKey] boolValue];
+        [self.caseSensitiveSwitch setOn:isCaseSensitive];
+        
+        BOOL isWholeWords = [[self.options objectForKey:kRWSearchWholeWordsKey] boolValue];
+        [self.wholeWordsSwitch setOn:isWholeWords];
+    }
+    else
+    {
+        // Initialize the options dictonary
+        self.options = [NSMutableDictionary dictionary];
+        
+        // Give it the default values
+        NSNumber *isCaseSensitive = [NSNumber numberWithBool:self.caseSensitiveSwitch.isOn];
+        [self.options setObject:isCaseSensitive forKey:kRWSearchCaseSensitiveKey];
+        
+        NSNumber *isMatchWord = [NSNumber numberWithBool:self.wholeWordsSwitch.isOn];
+        [self.options setObject:isMatchWord forKey:kRWSearchWholeWordsKey];
+    }
     
     // Dismiss the keyboard if user double taps on the background
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dimissKeyboard:)];
@@ -43,29 +68,39 @@
 
 - (IBAction)closeButtonTapped:(id)sender
 {
+    // Dismiss the view controller
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        // Notify the delegate
+        if (self.searchString && self.searchOptions)
+            [self.delegate controller:self didFinishWithSearchString:self.searchString options:self.searchOptions];
+        
+    }];
+}
+
+- (IBAction)searchButtonTapped:(id)sender
+{
+    self.searchString = self.searchTextField.text;
     self.searchOptions = self.options.copy;
     
-    // Notify the delegate
-    [self.delegate controller:self didFinishWithSearchString:self.searchString options:self.searchOptions];
-    
-    // Dismiss the view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self closeButtonTapped:nil];
 }
 
-
-- (IBAction)caseInsensitiveSearchSwitchToggled:(id)sender
+// By default search is case insensitive. If the switch is
+// on, search is case sensitive.
+- (IBAction)caseSensitiveSearchSwitchToggled:(id)sender
 {
     UISwitch *theSwitch = (UISwitch *)sender;
-    NSNumber *isCaseInsensitive = [NSNumber numberWithBool:theSwitch.isOn];
-    [self.options setObject:isCaseInsensitive forKey:kRWSearchCaseInsensitiveKey];
+    NSNumber *isCaseSensitive = [NSNumber numberWithBool:theSwitch.isOn];
+    [self.options setObject:isCaseSensitive forKey:kRWSearchCaseSensitiveKey];
 }
 
 
-- (IBAction)matchWordSwitchToggled:(id)sender
+- (IBAction)wholeWordsSwitchToggled:(id)sender
 {
     UISwitch *theSwitch = (UISwitch *)sender;
     NSNumber *isMatchWord = [NSNumber numberWithBool:theSwitch.isOn];
-    [self.options setObject:isMatchWord forKey:kRWSearchMatchWordKey];
+    [self.options setObject:isMatchWord forKey:kRWSearchWholeWordsKey];
 }
 
 
@@ -87,11 +122,13 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    self.searchString = textField.text;
+    
     // Dismiss the keyboard
     [textField resignFirstResponder];
     
     // Dimiss the view controller
-    [self closeButtonTapped:nil];
+    [self searchButtonTapped:nil];
     return YES;
 }
 @end

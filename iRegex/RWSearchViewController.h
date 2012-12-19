@@ -11,8 +11,8 @@
 
 // Search options keys
 // The values are BOOL for these keys
-#define kRWSearchCaseInsensitiveKey @"RWSearchCaseInsensitiveKey"
-#define kRWSearchMatchWordKey       @"RWSearchMatchWordKey"
+#define kRWSearchCaseSensitiveKey    @"RWSearchCaseSensitiveKey"
+#define kRWSearchWholeWordsKey       @"RWSearchWholeWordsKey"
 
 // Delegate
 @protocol RWSearchViewControllerDelegate;

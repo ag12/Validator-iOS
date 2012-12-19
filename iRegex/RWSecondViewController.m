@@ -16,9 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *socialSecurityNumberTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateOfBirthTextField;
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @end
 
 @implementation RWSecondViewController
@@ -37,9 +34,6 @@
                                                 self.lastNameTextField,
                                                 self.socialSecurityNumberTextField,
                                                 self.dateOfBirthTextField,
-                                                self.usernameTextField,
-                                                self.passwordTextField,
-                                                self.emailTextField,
                                                 nil];
     
     // Array of regex to validate each field
@@ -48,9 +42,6 @@
                                                  @"^[a-zA-Z']{2,10}$", // Last name
                                                  @"^\\d{9}$", // Social security number
                                                  @"^(([0-1])[1-2])[-](0[1-9]|[12][0-9]|3[01])[-](19|20)\\d\\d$", // Date of birth
-                                                 @"", // Username
-                                                 @"", // Password
-                                                 @"", // Email address
                                                  nil];
     
     // For convenience, if user double tapps anywhere on the view

@@ -16,10 +16,209 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. </string>
+                                        <string key="content">This is a blog post by site administrator Ray Wenderlich, an independent software developer and gamer.
+A while back on the weekly tutorial poll on the sidebar, you guys voted for a tutorial on In-App Purchases: consumables and receipt validation. As always, your wish is my command! :]
+This tutorial picks up where we left things off in our previous In-App Purchases tutorial. As a reminder, in that tutorial we developed an app called “In App Rage” where customers could purchase rage face comics as non-consumable In-App purchases.
+In this tutorial, you will extend the app to add a new consumable In-App Purchase – after all, those are often way more lucrative than non-consumables, since customers can purchase them more than once! You will also add receipt validation to add some extra security into the app.
+Note that this tutorial (and the previous) are focused on the “simplest and easiest” way to do things, not the most “robust and flexible” way of doing things. If you’re more interested in the latter, check out our book iOS 6 by Tutorials, where you’ll learn how to develop an extremely flexible server-based In-App Purchases system, with downloadable content hosted on Apple’s servers!
+So without further ado, let’s dive into some more In-App Purchases info – you’ll see it’s pretty easy, and there’s no need to rage about it! :]
+
+Getting Started
+Start by downloading the starter project for this tutorial.
+Note that the starter project is not the same as where we left things off in the last tutorial – I’ve added a few extra things for you:
+Added the ability to see a rage comic after purchasing it (which was left as an exercise at the end of last tutorial).
+Added the skeleton for the “random rage face” feature. Right now you can do this an unlimited amount of times for testing.
+Gratuitous icons and iPhone 5 screen size support! :]
+You’ll have to make a few changes to this project for it to work for you:
+Open RageIAPHelper.m and MasterViewController.m and search for “com.razeware” – you’ll see the product identifiers I set up. Replace those with your own product identifiers you created last time in iTunes Connect.
+Open In App Rage-Info.plist and update your Bundle Identifier to your own bundle identifier.
+Once you’re done, try out the app on your device and purchase a comic and make sure the purchase succeeds, and that you can view the comic after you buy it. Also, try out the new random rage face feature!
+
+Creating a Consumable In-App Purchase
+You have an sneaky plan to make money – instead of allowing the user to see cool random rage faces as often as they’d like, instead you’ll add an arbitrary limit to it, and charge users to purchase more, mwuhahaha!
+This way, there’s no limit to how much money users can spend on your app, hopefully keeping the bucks rolling in!
+Note: This is just the beginning of ways you can use consumable In-App Purchases to (arguably sneakily) increase your app’s revenue. To learn more, check out the many blogs and talks about freemium game design, gamer psychology, or any games by Zynga ;]
+Just like you did with consumable In-App Purchases, the first step to make this all happen is to create a new In-App Purchase entry in iTunes Connect.
+So log onto iTunes Connect, and click Manage Your Applications. Click your entry for In-App Rage, click Manage In-App Purchases, and Create New. Underneath the Consumable option, click Select.
+
+Next, fill out the screen that appears as follows (but replace razeware with your own name/company name):
+
+Finally, scroll down to the Language section and click Add Language. Fill in the dialog that appears as follows:
+
+Click Save, then Save again, and you’re done! Time to try this out in your app.
+Implementing a Consumable In-App Purchase
+To begin, open RageIAPHelper.m and add the new product identifier you jsut created to the bottom of the list of productIdentifiers, similar to the following:
+
+NSSet * productIdentifiers = [NSSet setWithObjects:
+                              @"com.razeware.inapprage.drummerrage",
+                              @"com.razeware.inapprage.itunesconnectrage",
+                              @"com.razeware.inapprage.nightlyrage",
+                              @"com.razeware.inapprage.studylikeaboss",
+                              @"com.razeware.inapprage.updogsadness",
+                              @"com.razeware.inapprage.randomrageface",
+                              nil];
+
+Next, open IAPHelper.m and modify your provideContentForProductIdentifier: method as follows:
+- (void)provideContentForProductIdentifier:(NSString *)productIdentifier {
+ 
+    if ([productIdentifier isEqualToString:@"com.razeware.inapprage.randomrageface"]) {
+ 
+        int currentValue = [[NSUserDefaults standardUserDefaults] 
+            integerForKey:@"com.razeware.inapprage.randomrageface"];
+        currentValue += 5;
+        [[NSUserDefaults standardUserDefaults] setInteger:currentValue 
+            forKey:@"com.razeware.inapprage.randomrageface"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+ 
+    } else {
+        [_purchasedProductIdentifiers addObject:productIdentifier];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+ 
+    [[NSNotificationCenter defaultCenter] 
+        postNotificationName:IAPHelperProductPurchasedNotification 
+        object:productIdentifier userInfo:nil];
+ 
+}
+Here you add some special case behavior for the consumable In-App Purchase you added. When a customer purchases this, instead of simply setting a flag indicating whether it’s purchased or not, you increment a value that keeps track of how many rolls the user currently has.
+Note: This works but isn’t the ideal way of doing things, because now your IAPHelper class has hard-coded logic for a particular In-App Purchase so isn’t as reusable. For a more reusable way of doing things, check out iOS 6 by Tutorials.
+Next open MasterViewController.m and replace your tableView:numberOfRowsInSection: and tableView:cellForRowAtIndexPath: methods as follows:
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _products.count;
+}
+ 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" 
+        forIndexPath:indexPath];
+ 
+    SKProduct * product = (SKProduct *) _products[indexPath.row];
+    cell.textLabel.text = product.localizedTitle;
+    [_priceFormatter setLocale:product.priceLocale];
+    cell.detailTextLabel.text = [_priceFormatter stringFromNumber:product.price];
+ 
+    if (![product.productIdentifier isEqualToString:@"com.razeware.inapprage.randomrageface"] &amp;&amp;
+        [[RageIAPHelper sharedInstance] productPurchased:product.productIdentifier]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.accessoryView = nil;
+    } else {
+        UIButton *buyButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        buyButton.frame = CGRectMake(0, 0, 72, 37);
+        [buyButton setTitle:@"Buy" forState:UIControlStateNormal];
+        buyButton.tag = indexPath.row;
+        [buyButton addTarget:self action:@selector(buyButtonTapped:) 
+            forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryView = buyButton;
+    }
+ 
+    return cell;
+}
+Here you have removed the “test” row that the sample project had earlier, since now you have a new consumable In-App Purchase to display instead. You also add some logic so that you always display the “Buy” button for the consumable IAP.
+Finally, open RandomFaceViewController.m and replace the buttonTapped: method with this (and these additional two methods):
+- (void)refresh {
+    int currentValue = [[NSUserDefaults standardUserDefaults] 
+        integerForKey:@"com.razeware.inapprage.randomrageface"];
+    self.label.text = [NSString stringWithFormat:@"Times Remaining: %d", currentValue];
+}
+ 
+- (void)viewWillAppear:(BOOL)animated {
+    [self refresh];
+}
+ 
+- (IBAction)buttonTapped:(id)sender {
+ 
+    int currentValue = [[NSUserDefaults standardUserDefaults] 
+        integerForKey:@"com.razeware.inapprage.randomrageface"];
+    if (currentValue &lt;= 0) return;
+ 
+    currentValue--;
+    [[NSUserDefaults standardUserDefaults] setInteger:currentValue 
+        forKey:@"com.razeware.inapprage.randomrageface"];
+    [self refresh];
+ 
+    int randomIdx = (arc4random() % 4) + 1;
+    NSString * randomName = [NSString stringWithFormat:@"random%d.png", randomIdx];
+    self.imageView.image = [UIImage imageNamed:randomName];
+}
+This is some basic logic to replace the unlimited button taps with using the new value you’re using to track the user’s spins.
+And that’s it! Build and run, and purchase a few spins. Then test out your the random rage face button and make sure it works as expected!
+
+Receipt Validation
+When you make an In-App Purchase, you can’t 100% trust that the response that comes over the network saying “everything went OK” really came from Apple without using a technique called “receipt validation.”
+When you make an In-App Purchase, Apple sends you back a special piece of data called a “receipt.” This is a private piece of data that records cryptographically-signed information about the transaction. The idea is that for your app to be secure, you shouldn’t blindly trust that a purchase completed – you should send the receipt to a special “receipt validation” server that Apple has set up to double-check that everything is OK.
+The dangers of not performing receipt validation were proven pretty spectacularly recently. A Russian hacker developed an easy-to-install In-App Purchase hack that allowed users to receive almost any In-App Purchase for free – at least, if the app wasn’t doing proper receipt validation.
+The hack is a classic “man in the middle” attack. You configure DNS records so your devices is routed to the “hack” servers rather than Apple, and you configure a fake certificate on your device so the OS trusts the “hack server” you’re connected to. Then, whenever you make a request to make an In-App Purchase, the request goes to the “hack server” instead. The hack server will always say “done and paid for!” so the app will unlock the content without knowing it’s been had – for free!
+This hack will no longer work on iOS 6. However, there are other variants hackers could employ in the future, so it’s still a good idea to use receipt validation.
+Note: For more information on the In-App Purchase hack described above, check out this article.
+The No-Server Solution
+Apple’s official recommendation to perform receipt validation is to connect to your own server, which then connects to Apple’s servers to validate the receipts.
+For a number of reasons, this is more secure than connecting to Apple directly, and this is the approach you take in iOS 6 by Tutorials.
+But in this tutorial, the focus is on the simplest and easiest way to implement In-App Purchases, and it would be a major pain to have to set up your own server just to validate receipts.
+A lot of other developers feel the same way, and so they wrote code to connect to Apple’s validation server directly from their apps rather than going through an intermediate server (despite Apple’s recommendations). It became so common that Apple provided some sample code demonstrating a fairly secure way to verify receipts by connecting to Apple’s servers directly.
+In this section, you’re going to integrate Apple’s provided code into the app to validate receipts before unlocking the purchases.
+Note: The original code was missing some pieces (such as the base64 routines) as well as some logic (like returning results to a caller), which I added in. Also, I cannot vouch 100% for the robustness of the Apple code, as it looks a little thrown together, so use at your own risk!
+Go ahead and download the resources for this tutorial, and drag the folder into your project. Make sure Copy items into destination group’s folder (if needed) is checked, Create groups for any added folders is selected, and the In-App Rage target is checked, and click Finish.
+The code requires the Security framework, so let’s add it to your project. To do this, click on your In App Rage project root in the Project Navigator and then the In App Rage target. Select the Build Phases tab, scroll down to the Link Binary with Libraries section, expand it if necessary, and click the + button. Select Security.framework and click Add. At this point, your list of libraries should look like the following:
+
+Then switch to IAPHelper.m and add the following import to the top of the file:
+#import "VerificationController.h"
+And add the following method:
+- (void)validateReceiptForTransaction:(SKPaymentTransaction *)transaction {
+    VerificationController * verifier = [VerificationController sharedInstance];
+    [verifier verifyPurchase:transaction completionHandler:^(BOOL success) {
+        if (success) {
+            NSLog(@"Successfully verified receipt!");
+            [self provideContentForProductIdentifier:transaction.payment.productIdentifier];
+        } else {
+            NSLog(@"Failed to validate receipt.");            
+            [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+        }
+    }];
+}
+This method simply calls Apple’s (somewhat modified) code to verify the transactions, and either provides the content or not, based on the results.
+The final step is to call this new method from completeTransaction: and restoreTransaction:, instead of providing the content right away. Replace those two methods with the following:
+- (void)completeTransaction:(SKPaymentTransaction *)transaction {
+    NSLog(@"completeTransaction...");
+ 
+    [self validateReceiptForTransaction:transaction];
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+}
+ 
+- (void)restoreTransaction:(SKPaymentTransaction *)transaction {
+    NSLog(@"restoreTransaction...");
+ 
+    [self validateReceiptForTransaction:transaction];
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+}
+Build and run, and your app should work as usual – but now with a great deal more security!
+Note: If you are going to use this verification controller in your app, remember that it is currently configured to use the sandbox server (see the verifyPurchase:completionHandler: method). You will need to switch this to production before you release your app.
+Where To Go From Here?
+Here is the final sample project from the tutorial series.
+Congrats – you now have implemented both non-consumable and consumable In-App Purchases, added the ability for users to restore transactions, and are validating receipts!
+Like I mentioned in the previous tutorials, for a lot of simple apps this is more than enough. But if you want to take things even further and learn how develop a robust and extensible server-based system, check out iOS 6 by Tutorials!
+I hope you enjoyed this series, and wish you best of luck with your consumable In-App Purchases! Just don’t be too sneaky/evil, one Zynga is enough ;]
+If you have any questions or comments on this tutorial or In-App Purchases in general, please join the forum discussion below!</string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="36"/>
+                                                    <textTab alignment="left" location="72"/>
+                                                    <textTab alignment="left" location="108"/>
+                                                    <textTab alignment="left" location="144"/>
+                                                    <textTab alignment="left" location="180"/>
+                                                    <textTab alignment="left" location="216"/>
+                                                    <textTab alignment="left" location="252"/>
+                                                    <textTab alignment="left" location="288"/>
+                                                    <textTab alignment="left" location="324"/>
+                                                    <textTab alignment="left" location="360"/>
+                                                    <textTab alignment="left" location="396"/>
+                                                    <textTab alignment="left" location="432"/>
+                                                </tabStops>
+                                            </paragraphStyle>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -195,88 +394,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Create your login below:" id="bCA-oI-8Og">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Pov-od-Ydy">
-                                        <rect key="frame" x="0.0" y="335" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username (e.g. flintstones)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QC4-xs-MsZ">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="MOG-ok-f15"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="70D-My-TPx" id="ALA-Ah-xjh"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="QC4-xs-MsZ" secondAttribute="trailing" constant="20" type="default" id="Evh-bl-7oD"/>
-                                            <constraint firstItem="QC4-xs-MsZ" firstAttribute="leading" secondItem="Pov-od-Ydy" secondAttribute="leading" constant="20" type="default" id="Hnp-by-Zpl"/>
-                                            <constraint firstItem="QC4-xs-MsZ" firstAttribute="top" secondItem="Pov-od-Ydy" secondAttribute="top" constant="8" id="v1Y-3I-xZT"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3Ps-Hd-yCZ">
-                                        <rect key="frame" x="0.0" y="380" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="S8I-hX-EYn">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="0gA-FZ-c3W"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="70D-My-TPx" id="dmL-07-35x"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="S8I-hX-EYn" secondAttribute="trailing" constant="20" type="default" id="Kuz-iQ-yeJ"/>
-                                            <constraint firstItem="S8I-hX-EYn" firstAttribute="leading" secondItem="3Ps-Hd-yCZ" secondAttribute="leading" constant="20" type="default" id="QGU-Cb-Hjl"/>
-                                            <constraint firstItem="S8I-hX-EYn" firstAttribute="centerY" secondItem="3Ps-Hd-yCZ" secondAttribute="centerY" type="default" id="iW1-3I-Zq0"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="w5Q-qx-NQd">
-                                        <rect key="frame" x="0.0" y="424" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="202" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email (e.g. stone@age.com)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m69-mz-EGX">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="LvX-0S-xYd"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="70D-My-TPx" id="c1N-Rc-AB5"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="m69-mz-EGX" firstAttribute="centerY" secondItem="w5Q-qx-NQd" secondAttribute="centerY" type="default" id="9dB-wT-gjZ"/>
-                                            <constraint firstItem="m69-mz-EGX" firstAttribute="leading" secondItem="w5Q-qx-NQd" secondAttribute="leading" constant="20" type="default" id="krD-cQ-qYD"/>
-                                            <constraint firstAttribute="trailing" secondItem="m69-mz-EGX" secondAttribute="trailing" constant="20" type="default" id="van-G8-rMY"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="70D-My-TPx" id="NCb-iV-3pW"/>
@@ -286,13 +403,10 @@
                     <navigationItem key="navigationItem" title="Sign up" id="tGC-qo-5oe"/>
                     <connections>
                         <outlet property="dateOfBirthTextField" destination="EvR-8y-Giw" id="dyt-ZY-GcU"/>
-                        <outlet property="emailTextField" destination="m69-mz-EGX" id="chX-F4-iEY"/>
                         <outlet property="firstNameTextField" destination="LzS-fN-Ol3" id="wMS-dP-RrW"/>
                         <outlet property="lastNameTextField" destination="Nth-ZO-WrB" id="oeb-5C-wne"/>
                         <outlet property="middleInitialTextField" destination="RF4-Ed-AKu" id="RZg-wP-L7C"/>
-                        <outlet property="passwordTextField" destination="S8I-hX-EYn" id="pMi-yC-fAw"/>
                         <outlet property="socialSecurityNumberTextField" destination="h3K-HU-Nny" id="beP-f9-QDA"/>
-                        <outlet property="usernameTextField" destination="QC4-xs-MsZ" id="jab-jz-8Ng"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ckf-pk-3si" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -303,7 +417,7 @@
         <scene sceneID="DSr-EU-Hig">
             <objects>
                 <tableViewController id="tKH-IK-Byd" customClass="RWSearchViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="m8g-QD-Jj0" customClass="RWS">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="m8g-QD-Jj0">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -311,7 +425,7 @@
                             <tableViewSection headerTitle="Look for text:" id="uDx-4Q-pkA">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TUJ-EG-4Dc">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -319,10 +433,10 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a text to search for" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IJX-jF-Zbl">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="283" id="XIR-IX-gJE"/>
+                                                        <constraint firstAttribute="width" constant="260" id="GbH-Jh-h82"/>
                                                         <constraint firstAttribute="height" constant="30" id="dxz-uM-Mrs"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="tKH-IK-Byd" id="Ahs-MT-9Co"/>
@@ -333,7 +447,7 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="IJX-jF-Zbl" firstAttribute="centerY" secondItem="TUJ-EG-4Dc" secondAttribute="centerY" type="default" id="4qc-eE-kXZ"/>
-                                            <constraint firstItem="IJX-jF-Zbl" firstAttribute="leading" secondItem="TUJ-EG-4Dc" secondAttribute="leading" constant="18" id="AGc-Cf-MD3"/>
+                                            <constraint firstItem="IJX-jF-Zbl" firstAttribute="centerX" secondItem="TUJ-EG-4Dc" secondAttribute="centerX" type="default" id="jHJ-cO-X7V"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -347,8 +461,12 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzx-dX-J7I"/>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Case insensitive" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDK-c0-l3E">
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hzx-dX-J7I">
+                                                    <connections>
+                                                        <action selector="caseSensitiveSearchSwitchToggled:" destination="tKH-IK-Byd" eventType="valueChanged" id="BSR-fA-Bsd"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Match case" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDK-c0-l3E">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="175" id="pI3-0e-Bty"/>
                                                     </constraints>
@@ -367,14 +485,18 @@
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5Pj-dk-aVA">
-                                        <rect key="frame" x="0.0" y="182" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="182" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZf-Qa-jR2"/>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Match word" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu9-Fk-E9h">
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZZf-Qa-jR2">
+                                                    <connections>
+                                                        <action selector="wholeWordsSwitchToggled:" destination="tKH-IK-Byd" eventType="valueChanged" id="VaQ-r8-hjL"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Whole words" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu9-Fk-E9h">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="175" id="JNh-B5-ou7"/>
                                                     </constraints>
@@ -392,32 +514,6 @@
                                             <constraint firstItem="ZZf-Qa-jR2" firstAttribute="leading" secondItem="hu9-Fk-E9h" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="wm6-ye-Xh1"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PLA-YX-CjQ">
-                                        <rect key="frame" x="0.0" y="226" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKT-c9-XIJ"/>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmN-0Z-ISx">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="175" id="rdL-q6-jQb"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="GmN-0Z-ISx" firstAttribute="centerY" secondItem="CKT-c9-XIJ" secondAttribute="centerY" type="default" id="5uO-QY-7Ra"/>
-                                            <constraint firstItem="CKT-c9-XIJ" firstAttribute="top" secondItem="PLA-YX-CjQ" secondAttribute="top" constant="8" id="8hB-Y4-qaN"/>
-                                            <constraint firstItem="CKT-c9-XIJ" firstAttribute="leading" secondItem="GmN-0Z-ISx" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Mf0-AD-cWU"/>
-                                            <constraint firstItem="GmN-0Z-ISx" firstAttribute="leading" secondItem="PLA-YX-CjQ" secondAttribute="leading" constant="30" id="miq-wx-bkN"/>
-                                        </constraints>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -432,9 +528,16 @@
                                 <action selector="closeButtonTapped:" destination="tKH-IK-Byd" id="x4B-dC-ifp"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" style="done" id="Pwg-fg-ugw">
+                            <connections>
+                                <action selector="searchButtonTapped:" destination="tKH-IK-Byd" id="Qn2-H2-4a2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="caseSensitiveSwitch" destination="hzx-dX-J7I" id="otw-bG-zjQ"/>
                         <outlet property="searchTextField" destination="IJX-jF-Zbl" id="PDV-ar-nhR"/>
+                        <outlet property="wholeWordsSwitch" destination="ZZf-Qa-jR2" id="nhX-ZM-nW8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PfS-7X-bgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -528,26 +631,32 @@
         <class className="RWFirstViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RWFirstViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>
         </class>
         <class className="RWSearchViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RWSearchViewController.h"/>
             <relationships>
+                <relationship kind="action" name="caseSensitiveSearchSwitchToggled:"/>
+                <relationship kind="action" name="closeButtonTapped:"/>
+                <relationship kind="action" name="dimissKeyboard:"/>
+                <relationship kind="action" name="searchButtonTapped:"/>
+                <relationship kind="action" name="wholeWordsSwitchToggled:"/>
+                <relationship kind="outlet" name="caseSensitiveSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="searchTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="wholeWordsSwitch" candidateClass="UISwitch"/>
             </relationships>
         </class>
         <class className="RWSecondViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RWSecondViewController.h"/>
             <relationships>
+                <relationship kind="action" name="doubleTapGestureRecognized:"/>
                 <relationship kind="outlet" name="dateOfBirthTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lastNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="middleInitialTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="socialSecurityNumberTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
     </classes>
