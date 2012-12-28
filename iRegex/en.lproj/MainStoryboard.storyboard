@@ -47,160 +47,7 @@ Finally, scroll down to the Language section and click Add Language. Fill in the
 
 Click Save, then Save again, and you’re done! Time to try this out in your app.
 Implementing a Consumable In-App Purchase
-To begin, open RageIAPHelper.m and add the new product identifier you jsut created to the bottom of the list of productIdentifiers, similar to the following:
-
-NSSet * productIdentifiers = [NSSet setWithObjects:
-                              @"com.razeware.inapprage.drummerrage",
-                              @"com.razeware.inapprage.itunesconnectrage",
-                              @"com.razeware.inapprage.nightlyrage",
-                              @"com.razeware.inapprage.studylikeaboss",
-                              @"com.razeware.inapprage.updogsadness",
-                              @"com.razeware.inapprage.randomrageface",
-                              nil];
-
-Next, open IAPHelper.m and modify your provideContentForProductIdentifier: method as follows:
-- (void)provideContentForProductIdentifier:(NSString *)productIdentifier {
- 
-    if ([productIdentifier isEqualToString:@"com.razeware.inapprage.randomrageface"]) {
- 
-        int currentValue = [[NSUserDefaults standardUserDefaults] 
-            integerForKey:@"com.razeware.inapprage.randomrageface"];
-        currentValue += 5;
-        [[NSUserDefaults standardUserDefaults] setInteger:currentValue 
-            forKey:@"com.razeware.inapprage.randomrageface"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
- 
-    } else {
-        [_purchasedProductIdentifiers addObject:productIdentifier];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
- 
-    [[NSNotificationCenter defaultCenter] 
-        postNotificationName:IAPHelperProductPurchasedNotification 
-        object:productIdentifier userInfo:nil];
- 
-}
-Here you add some special case behavior for the consumable In-App Purchase you added. When a customer purchases this, instead of simply setting a flag indicating whether it’s purchased or not, you increment a value that keeps track of how many rolls the user currently has.
-Note: This works but isn’t the ideal way of doing things, because now your IAPHelper class has hard-coded logic for a particular In-App Purchase so isn’t as reusable. For a more reusable way of doing things, check out iOS 6 by Tutorials.
-Next open MasterViewController.m and replace your tableView:numberOfRowsInSection: and tableView:cellForRowAtIndexPath: methods as follows:
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _products.count;
-}
- 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" 
-        forIndexPath:indexPath];
- 
-    SKProduct * product = (SKProduct *) _products[indexPath.row];
-    cell.textLabel.text = product.localizedTitle;
-    [_priceFormatter setLocale:product.priceLocale];
-    cell.detailTextLabel.text = [_priceFormatter stringFromNumber:product.price];
- 
-    if (![product.productIdentifier isEqualToString:@"com.razeware.inapprage.randomrageface"] &amp;&amp;
-        [[RageIAPHelper sharedInstance] productPurchased:product.productIdentifier]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        cell.accessoryView = nil;
-    } else {
-        UIButton *buyButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        buyButton.frame = CGRectMake(0, 0, 72, 37);
-        [buyButton setTitle:@"Buy" forState:UIControlStateNormal];
-        buyButton.tag = indexPath.row;
-        [buyButton addTarget:self action:@selector(buyButtonTapped:) 
-            forControlEvents:UIControlEventTouchUpInside];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.accessoryView = buyButton;
-    }
- 
-    return cell;
-}
-Here you have removed the “test” row that the sample project had earlier, since now you have a new consumable In-App Purchase to display instead. You also add some logic so that you always display the “Buy” button for the consumable IAP.
-Finally, open RandomFaceViewController.m and replace the buttonTapped: method with this (and these additional two methods):
-- (void)refresh {
-    int currentValue = [[NSUserDefaults standardUserDefaults] 
-        integerForKey:@"com.razeware.inapprage.randomrageface"];
-    self.label.text = [NSString stringWithFormat:@"Times Remaining: %d", currentValue];
-}
- 
-- (void)viewWillAppear:(BOOL)animated {
-    [self refresh];
-}
- 
-- (IBAction)buttonTapped:(id)sender {
- 
-    int currentValue = [[NSUserDefaults standardUserDefaults] 
-        integerForKey:@"com.razeware.inapprage.randomrageface"];
-    if (currentValue &lt;= 0) return;
- 
-    currentValue--;
-    [[NSUserDefaults standardUserDefaults] setInteger:currentValue 
-        forKey:@"com.razeware.inapprage.randomrageface"];
-    [self refresh];
- 
-    int randomIdx = (arc4random() % 4) + 1;
-    NSString * randomName = [NSString stringWithFormat:@"random%d.png", randomIdx];
-    self.imageView.image = [UIImage imageNamed:randomName];
-}
-This is some basic logic to replace the unlimited button taps with using the new value you’re using to track the user’s spins.
-And that’s it! Build and run, and purchase a few spins. Then test out your the random rage face button and make sure it works as expected!
-
-Receipt Validation
-When you make an In-App Purchase, you can’t 100% trust that the response that comes over the network saying “everything went OK” really came from Apple without using a technique called “receipt validation.”
-When you make an In-App Purchase, Apple sends you back a special piece of data called a “receipt.” This is a private piece of data that records cryptographically-signed information about the transaction. The idea is that for your app to be secure, you shouldn’t blindly trust that a purchase completed – you should send the receipt to a special “receipt validation” server that Apple has set up to double-check that everything is OK.
-The dangers of not performing receipt validation were proven pretty spectacularly recently. A Russian hacker developed an easy-to-install In-App Purchase hack that allowed users to receive almost any In-App Purchase for free – at least, if the app wasn’t doing proper receipt validation.
-The hack is a classic “man in the middle” attack. You configure DNS records so your devices is routed to the “hack” servers rather than Apple, and you configure a fake certificate on your device so the OS trusts the “hack server” you’re connected to. Then, whenever you make a request to make an In-App Purchase, the request goes to the “hack server” instead. The hack server will always say “done and paid for!” so the app will unlock the content without knowing it’s been had – for free!
-This hack will no longer work on iOS 6. However, there are other variants hackers could employ in the future, so it’s still a good idea to use receipt validation.
-Note: For more information on the In-App Purchase hack described above, check out this article.
-The No-Server Solution
-Apple’s official recommendation to perform receipt validation is to connect to your own server, which then connects to Apple’s servers to validate the receipts.
-For a number of reasons, this is more secure than connecting to Apple directly, and this is the approach you take in iOS 6 by Tutorials.
-But in this tutorial, the focus is on the simplest and easiest way to implement In-App Purchases, and it would be a major pain to have to set up your own server just to validate receipts.
-A lot of other developers feel the same way, and so they wrote code to connect to Apple’s validation server directly from their apps rather than going through an intermediate server (despite Apple’s recommendations). It became so common that Apple provided some sample code demonstrating a fairly secure way to verify receipts by connecting to Apple’s servers directly.
-In this section, you’re going to integrate Apple’s provided code into the app to validate receipts before unlocking the purchases.
-Note: The original code was missing some pieces (such as the base64 routines) as well as some logic (like returning results to a caller), which I added in. Also, I cannot vouch 100% for the robustness of the Apple code, as it looks a little thrown together, so use at your own risk!
-Go ahead and download the resources for this tutorial, and drag the folder into your project. Make sure Copy items into destination group’s folder (if needed) is checked, Create groups for any added folders is selected, and the In-App Rage target is checked, and click Finish.
-The code requires the Security framework, so let’s add it to your project. To do this, click on your In App Rage project root in the Project Navigator and then the In App Rage target. Select the Build Phases tab, scroll down to the Link Binary with Libraries section, expand it if necessary, and click the + button. Select Security.framework and click Add. At this point, your list of libraries should look like the following:
-
-Then switch to IAPHelper.m and add the following import to the top of the file:
-#import "VerificationController.h"
-And add the following method:
-- (void)validateReceiptForTransaction:(SKPaymentTransaction *)transaction {
-    VerificationController * verifier = [VerificationController sharedInstance];
-    [verifier verifyPurchase:transaction completionHandler:^(BOOL success) {
-        if (success) {
-            NSLog(@"Successfully verified receipt!");
-            [self provideContentForProductIdentifier:transaction.payment.productIdentifier];
-        } else {
-            NSLog(@"Failed to validate receipt.");            
-            [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-        }
-    }];
-}
-This method simply calls Apple’s (somewhat modified) code to verify the transactions, and either provides the content or not, based on the results.
-The final step is to call this new method from completeTransaction: and restoreTransaction:, instead of providing the content right away. Replace those two methods with the following:
-- (void)completeTransaction:(SKPaymentTransaction *)transaction {
-    NSLog(@"completeTransaction...");
- 
-    [self validateReceiptForTransaction:transaction];
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-}
- 
-- (void)restoreTransaction:(SKPaymentTransaction *)transaction {
-    NSLog(@"restoreTransaction...");
- 
-    [self validateReceiptForTransaction:transaction];
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-}
-Build and run, and your app should work as usual – but now with a great deal more security!
-Note: If you are going to use this verification controller in your app, remember that it is currently configured to use the sandbox server (see the verifyPurchase:completionHandler: method). You will need to switch this to production before you release your app.
-Where To Go From Here?
-Here is the final sample project from the tutorial series.
-Congrats – you now have implemented both non-consumable and consumable In-App Purchases, added the ability for users to restore transactions, and are validating receipts!
-Like I mentioned in the previous tutorials, for a lot of simple apps this is more than enough. But if you want to take things even further and learn how develop a robust and extensible server-based system, check out iOS 6 by Tutorials!
-I hope you enjoyed this series, and wish you best of luck with your consumable In-App Purchases! Just don’t be too sneaky/evil, one Zynga is enough ;]
-If you have any questions or comments on this tutorial or In-App Purchases in general, please join the forum discussion below!</string>
+To begin, open RageIAPHelper.m and add the new product identifier you jsut created to the bottom of the list of productIdentifiers.</string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="Helvetica"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural">
@@ -244,6 +91,7 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBarButton" destination="Fu9-A8-ys6" id="OHE-33-4o6"/>
                         <outlet property="textView" destination="3xa-b2-Ols" id="QUc-Pr-1Sf"/>
                     </connections>
                 </viewController>
@@ -260,7 +108,7 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Please enter your information below:" id="d4b-uG-6ea">
+                            <tableViewSection headerTitle="Please enter your information below:" footerTitle="Double tap to close the keyboard." id="d4b-uG-6ea">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vAw-8T-cbk">
                                         <rect key="frame" x="0.0" y="67" width="320" height="45"/>
@@ -340,34 +188,8 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                                             <constraint firstAttribute="trailing" secondItem="Nth-ZO-WrB" secondAttribute="trailing" constant="20" type="default" id="kVb-38-l5p"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="XeK-5u-aqX">
-                                        <rect key="frame" x="0.0" y="200" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Social security number (e.g. 123-45-6789)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="h3K-HU-Nny">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="FpO-wl-FlC"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="70D-My-TPx" id="vs9-tO-pvC"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="h3K-HU-Nny" secondAttribute="trailing" constant="20" type="default" id="4FS-H7-dd3"/>
-                                            <constraint firstItem="h3K-HU-Nny" firstAttribute="leading" secondItem="XeK-5u-aqX" secondAttribute="leading" constant="20" type="default" id="7Rb-41-1nX"/>
-                                            <constraint firstItem="h3K-HU-Nny" firstAttribute="centerY" secondItem="XeK-5u-aqX" secondAttribute="centerY" type="default" id="ObL-Qh-aW4"/>
-                                        </constraints>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PCg-up-SzR">
-                                        <rect key="frame" x="0.0" y="244" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="200" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -378,7 +200,7 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                                                         <constraint firstAttribute="height" constant="30" id="rMO-YZ-FnD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="70D-My-TPx" id="dhD-q2-om3"/>
                                                     </connections>
@@ -406,7 +228,6 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                         <outlet property="firstNameTextField" destination="LzS-fN-Ol3" id="wMS-dP-RrW"/>
                         <outlet property="lastNameTextField" destination="Nth-ZO-WrB" id="oeb-5C-wne"/>
                         <outlet property="middleInitialTextField" destination="RF4-Ed-AKu" id="RZg-wP-L7C"/>
-                        <outlet property="socialSecurityNumberTextField" destination="h3K-HU-Nny" id="beP-f9-QDA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ckf-pk-3si" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -425,7 +246,7 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                             <tableViewSection headerTitle="Look for text:" id="uDx-4Q-pkA">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="TUJ-EG-4Dc">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -450,12 +271,45 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                                             <constraint firstItem="IJX-jF-Zbl" firstAttribute="centerX" secondItem="TUJ-EG-4Dc" secondAttribute="centerX" type="default" id="jHJ-cO-X7V"/>
                                         </constraints>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vo4-0z-1AL">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Replace with text" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="c1g-vS-vir">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="s2q-bD-8sJ"/>
+                                                        <constraint firstAttribute="width" constant="150" id="s7X-2U-k43"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="tKH-IK-Byd" id="sIj-c8-dCZ"/>
+                                                    </connections>
+                                                </textField>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ggw-MS-Qo5">
+                                                    <connections>
+                                                        <action selector="replaceSwitchToggled:" destination="tKH-IK-Byd" eventType="editingChanged" id="qlt-uJ-loG"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="ggw-MS-Qo5" firstAttribute="top" secondItem="Vo4-0z-1AL" secondAttribute="top" constant="8" id="D5s-cS-YES"/>
+                                            <constraint firstItem="c1g-vS-vir" firstAttribute="centerY" secondItem="Vo4-0z-1AL" secondAttribute="centerY" type="default" id="Pgr-zD-aQj"/>
+                                            <constraint firstAttribute="trailing" secondItem="ggw-MS-Qo5" secondAttribute="trailing" constant="30" id="TBi-Pq-MHn"/>
+                                            <constraint firstItem="c1g-vS-vir" firstAttribute="leading" secondItem="Vo4-0z-1AL" secondAttribute="leading" constant="30" id="YOp-H9-wuy"/>
+                                        </constraints>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="With options:" id="Dtb-Cw-UmG">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="QpT-ik-VA5">
-                                        <rect key="frame" x="0.0" y="137" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="181" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -485,7 +339,7 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5Pj-dk-aVA">
-                                        <rect key="frame" x="0.0" y="182" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="226" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -536,13 +390,15 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                     </navigationItem>
                     <connections>
                         <outlet property="caseSensitiveSwitch" destination="hzx-dX-J7I" id="otw-bG-zjQ"/>
+                        <outlet property="replaceSwitch" destination="ggw-MS-Qo5" id="5ue-Ab-MCH"/>
+                        <outlet property="replaceTextField" destination="c1g-vS-vir" id="5Gc-dJ-EIx"/>
                         <outlet property="searchTextField" destination="IJX-jF-Zbl" id="PDV-ar-nhR"/>
                         <outlet property="wholeWordsSwitch" destination="ZZf-Qa-jR2" id="nhX-ZM-nW8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PfS-7X-bgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2043" y="-193"/>
+            <point key="canvasLocation" x="2090" y="-193"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -557,6 +413,7 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                     <connections>
                         <segue destination="FmU-bh-IWh" kind="relationship" relationship="viewControllers" id="26"/>
                         <segue destination="PvW-tD-wcS" kind="relationship" relationship="viewControllers" id="27"/>
+                        <segue destination="3bM-Pj-SJf" kind="relationship" relationship="viewControllers" id="T6g-i9-ihT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
@@ -619,10 +476,85 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
             </objects>
             <point key="canvasLocation" x="653" y="498"/>
         </scene>
+        <!--Navigation Controller - Third-->
+        <scene sceneID="I3z-4H-NOy">
+            <objects>
+                <navigationController id="3bM-Pj-SJf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Third" image="third.png" id="mb5-yQ-rdv"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MOK-YR-sAI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0iW-Bc-Vps" kind="relationship" relationship="rootViewController" id="AVl-J5-8Gv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h3c-Mg-W3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653" y="1238"/>
+        </scene>
+        <!--Third View Controller-->
+        <scene sceneID="dKh-KD-axP">
+            <objects>
+                <tableViewController id="0iW-Bc-Vps" customClass="RWThirdViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Qox-ia-PYH">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Enter your Social Security Number (SSN) here:" footerTitle="Double tap to close the keyboard." id="D71-0V-SMV">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1Wx-cu-MOg">
+                                        <rect key="frame" x="0.0" y="67" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="e.g. 123-45-6789" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hg0-c1-mwM">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="WbS-jK-rmo"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="textFieldTextDidChange:" destination="0iW-Bc-Vps" eventType="editingChanged" id="Als-07-AI2"/>
+                                                        <outlet property="delegate" destination="0iW-Bc-Vps" id="ayr-JV-kAY"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="Hg0-c1-mwM" firstAttribute="centerY" secondItem="1Wx-cu-MOg" secondAttribute="centerY" type="default" id="QLQ-Oe-EQa"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hg0-c1-mwM" secondAttribute="trailing" constant="20" type="default" id="XN9-dY-7qB"/>
+                                            <constraint firstItem="Hg0-c1-mwM" firstAttribute="leading" secondItem="1Wx-cu-MOg" secondAttribute="leading" constant="20" type="default" id="sBB-M2-GiV"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="0iW-Bc-Vps" id="nzX-c8-2EE"/>
+                            <outlet property="delegate" destination="0iW-Bc-Vps" id="Ikx-Kg-Gr9"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="NcS-0i-38j"/>
+                    <connections>
+                        <outlet property="SSNTextField" destination="Hg0-c1-mwM" id="C1b-cj-ZIS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OCM-WX-l5x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1179" y="1238"/>
+        </scene>
     </scenes>
     <resources>
         <image name="first" width="16" height="16"/>
         <image name="second" width="16" height="16"/>
+        <image name="third.png" width="30" height="30"/>
     </resources>
     <classes>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -632,6 +564,8 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RWFirstViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="editBarButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="searchBarButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>
         </class>
@@ -641,9 +575,12 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                 <relationship kind="action" name="caseSensitiveSearchSwitchToggled:"/>
                 <relationship kind="action" name="closeButtonTapped:"/>
                 <relationship kind="action" name="dimissKeyboard:"/>
+                <relationship kind="action" name="replaceSwitchToggled:"/>
                 <relationship kind="action" name="searchButtonTapped:"/>
                 <relationship kind="action" name="wholeWordsSwitchToggled:"/>
                 <relationship kind="outlet" name="caseSensitiveSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="replaceSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="replaceTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="searchTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="wholeWordsSwitch" candidateClass="UISwitch"/>
             </relationships>
@@ -656,7 +593,14 @@ If you have any questions or comments on this tutorial or In-App Purchases in ge
                 <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lastNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="middleInitialTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="socialSecurityNumberTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="RWThirdViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RWThirdViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doubleTapGestureRecognized:"/>
+                <relationship kind="action" name="textFieldTextDidChange:"/>
+                <relationship kind="outlet" name="SSNTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
     </classes>

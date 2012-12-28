@@ -12,19 +12,20 @@
 @interface RWFirstViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editBarButton;
 @property (strong, nonatomic) NSString *lastSearchString;
+@property (strong, nonatomic) NSString *lastReplacementString;
 @property (strong, nonatomic) NSDictionary *lastSearchOptions;
 @end
 
+
 @implementation RWFirstViewController
+
 
 #pragma mark
 #pragma mark - View life cycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -39,15 +40,20 @@
     }
 }
 
+
 #pragma mark
 #pragma mark - RWSearchViewController delegate
 
-- (void)controller:(RWSearchViewController *)controller didFinishWithSearchString:(NSString *)string options:(NSDictionary *)options
+
+- (void)controller:(RWSearchViewController *)controller didFinishWithSearchString:(NSString *)string options:(NSDictionary *)options replacement:(NSString *)replacement
 {
-    if (![string isEqualToString:self.lastSearchString] || ![options isEqual:self.lastSearchOptions])
+    if (![string isEqualToString:self.lastSearchString] ||
+        ![options isEqual:self.lastSearchOptions] ||
+        ![replacement isEqualToString:self.lastReplacementString])
     {
         // Keep a reference
         self.lastSearchString = string;
+        self.lastReplacementString = replacement;
         self.lastSearchOptions = options;
         
         // Do a clean up of the last time. Remove all the highlights
@@ -57,6 +63,7 @@
         [self searchForText:string inTextView:self.textView options:options];
     }
 }
+
 
 #pragma mark
 #pragma mark - Manage search
@@ -178,8 +185,9 @@
     NSMutableAttributedString *textViewAttributedString = self.textView.attributedText.mutableCopy;
     CFAttributedStringReplaceAttributedString((__bridge CFMutableAttributedStringRef)(textViewAttributedString), visibleRange_CF, (__bridge CFAttributedStringRef)(visibleAttributedString));
     
-    self.textView.attributedText = textViewAttributedString;
+    self.textView.attributedText = textViewAttributedString;;
 }
+
 
 // Return range of text in text view that is visible
 - (NSRange)visibleRangeOfTextView:(UITextView *)textView
@@ -192,6 +200,7 @@
     return visibleRange;
 }
 
+
 // Compare the two ranges and return YES if range1 contains range2
 bool NSRangeContainsRange (NSRange range1, NSRange range2)
 {
@@ -203,8 +212,10 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
     return contains;
 }
 
+
 #pragma mark
 #pragma mark - UIScrollView delegate
+
 
 // Called when the user finishes scrolling the content
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
@@ -216,6 +227,7 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
     }
 }
 
+
 // Called when the scroll view has ended decelerating the scrolling movement
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -223,18 +235,10 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
         [self searchForText:self.lastSearchString inTextView:self.textView options:self.lastSearchOptions];
 }
 
+
 #pragma mark
 #pragma mark - Highlighting the text in UITextView
 
-// Highlight a given range in a text view
-/*** Deprecated after the third try
-- (void)highlightRange:(NSRange)range inTextView:(UITextView *)textView
-{
-    NSMutableAttributedString *mutableAttributedString = textView.attributedText.mutableCopy;
-    [mutableAttributedString addAttribute:NSBackgroundColorAttributeName value:[UIColor yellowColor] range:range];
-    self.textView.attributedText = mutableAttributedString.copy;
-}
- ***/
 
 // Remove all highlighted text (the background color) of NSAttributedString
 // in a given UITextView
@@ -245,5 +249,6 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
     [mutableAttributedString addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:wholeRane];
     textView.attributedText = mutableAttributedString.copy;
 }
+
 
 @end

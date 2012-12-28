@@ -11,15 +11,20 @@
 
 @interface RWSearchViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+@property (weak, nonatomic) IBOutlet UITextField *replaceTextField;
+@property (weak, nonatomic) IBOutlet UISwitch *replaceSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *caseSensitiveSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *wholeWordsSwitch;
 @property (strong, nonatomic) NSMutableDictionary *options;
 @end
 
+
 @implementation RWSearchViewController
+
 
 #pragma mark
 #pragma mark - View life cycle
+
 
 - (void)viewDidLoad
 {
@@ -34,12 +39,16 @@
     {
         // Adjust based on the last search options
         self.options = self.searchOptions.mutableCopy;
+        self.replaceTextField.text = self.replacementString;
         
         BOOL isCaseSensitive = [[self.options objectForKey:kRWSearchCaseSensitiveKey] boolValue];
         [self.caseSensitiveSwitch setOn:isCaseSensitive];
         
         BOOL isWholeWords = [[self.options objectForKey:kRWSearchWholeWordsKey] boolValue];
         [self.wholeWordsSwitch setOn:isWholeWords];
+        
+        BOOL isReplace = [[self.options objectForKey:KRWReplacementKey] boolValue];
+        [self.replaceSwitch setOn:isReplace];
     }
     else
     {
@@ -52,6 +61,9 @@
         
         NSNumber *isMatchWord = [NSNumber numberWithBool:self.wholeWordsSwitch.isOn];
         [self.options setObject:isMatchWord forKey:kRWSearchWholeWordsKey];
+        
+        NSNumber *isReplace = [NSNumber numberWithBool:self.replaceSwitch.isOn];
+        [self.options setObject:isReplace forKey:KRWReplacementKey];
     }
     
     // Dismiss the keyboard if user double taps on the background
@@ -63,8 +75,10 @@
     [super viewDidLoad];
 }
 
+
 #pragma mark
 #pragma mark - IBActions
+
 
 - (IBAction)closeButtonTapped:(id)sender
 {
@@ -73,14 +87,16 @@
         
         // Notify the delegate
         if (self.searchString && self.searchOptions)
-            [self.delegate controller:self didFinishWithSearchString:self.searchString options:self.searchOptions];
+            [self.delegate controller:self didFinishWithSearchString:self.searchString options:self.searchOptions replacement:self.replacementString];
         
     }];
 }
 
+
 - (IBAction)searchButtonTapped:(id)sender
 {
     self.searchString = self.searchTextField.text;
+    self.replacementString = self.replaceTextField.text;
     self.searchOptions = self.options.copy;
     
     [self closeButtonTapped:nil];
@@ -104,6 +120,22 @@
 }
 
 
+- (IBAction)replaceSwitchToggled:(id)sender
+{
+    UISwitch *theSwitch = (UISwitch *)sender;
+    NSNumber *isReplace = [NSNumber numberWithBool:theSwitch.isOn];
+    [self.options setObject:isReplace forKey:KRWReplacementKey];
+    
+    self.replaceTextField.enabled = theSwitch.isOn;
+    
+    // When user turns off the replacement string, and there is value
+    // in self.replacementString, we don't want to pass it back to the
+    // delegate.
+    if (!theSwitch.isOn)
+        self.replacementString = nil;
+}
+
+
 - (IBAction)dimissKeyboard:(id)sender
 {
     [self.searchTextField resignFirstResponder];
@@ -113,22 +145,17 @@
 #pragma mark - UITextField delegates
 
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    self.searchString = textField.text;
-    return YES;
-}
-
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    self.searchString = textField.text;
+    if ([textField isEqual:self.searchTextField])
+        self.searchString = textField.text;
+    else if ([textField isEqual:self.replaceTextField])
+        self.replacementString = textField.text;
     
     // Dismiss the keyboard
     [textField resignFirstResponder];
     
-    // Dimiss the view controller
-    [self searchButtonTapped:nil];
     return YES;
 }
+
 @end

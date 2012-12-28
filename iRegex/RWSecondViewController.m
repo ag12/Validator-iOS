@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *middleInitialTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *socialSecurityNumberTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateOfBirthTextField;
 @end
 
@@ -29,20 +28,18 @@
     
     // Keep an array of text field to make it
     // first responder upon tapping on next button
-	self.textFields = [NSArray arrayWithObjects:self.firstNameTextField,
-                                                self.middleInitialTextField,
-                                                self.lastNameTextField,
-                                                self.socialSecurityNumberTextField,
-                                                self.dateOfBirthTextField,
-                                                nil];
+	self.textFields = @[self.firstNameTextField,
+                        self.middleInitialTextField,
+                        self.lastNameTextField,
+                        self.dateOfBirthTextField,
+                        ];
     
     // Array of regex to validate each field
-    self.validations = [NSArray arrayWithObjects:@"^[a-zA-Z]{1,10}$", // First name
-                                                 @"^[A-Z]{1}$", // Middle name
-                                                 @"^[a-zA-Z']{2,10}$", // Last name
-                                                 @"^\\d{9}$", // Social security number
-                                                 @"^(([0-1])[1-2])[-](0[1-9]|[12][0-9]|3[01])[-](19|20)\\d\\d$", // Date of birth
-                                                 nil];
+    self.validations = @[@"^[a-zA-Z]{1,10}$", // First name
+                         @"^[A-Z]$", // Middle name
+                         @"^[a-zA-Z']{2,10}$", // Last name
+                         @"^(0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19|20)\\d\\d$", // Date of birth
+                         ];
     
     // For convenience, if user double tapps anywhere on the view
     // we want to dismiss the keyboard
@@ -213,8 +210,7 @@
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
     
-    if (!regex)
-        NSAssert(FALSE, @"Unable to create regular expression");
+    NSAssert(regex, @"Unable to create regular expression");
     
     NSRange textRange = NSMakeRange(0, string.length);
     NSRange matchRange = [regex rangeOfFirstMatchInString:string options:NSMatchingReportProgress range:textRange];

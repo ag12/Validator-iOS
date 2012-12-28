@@ -13,6 +13,7 @@
 // The values are BOOL for these keys
 #define kRWSearchCaseSensitiveKey    @"RWSearchCaseSensitiveKey"
 #define kRWSearchWholeWordsKey       @"RWSearchWholeWordsKey"
+#define KRWReplacementKey            @"RWReplacementKey"
 
 // Delegate
 @protocol RWSearchViewControllerDelegate;
@@ -27,6 +28,8 @@
 
 @property (strong, nonatomic) NSDictionary *searchOptions;
 
+@property (strong, nonatomic) NSString *replacementString;
+
 @end
 
 
@@ -34,6 +37,6 @@
 @protocol RWSearchViewControllerDelegate <NSObject>
 
 // Return self, the search string and the search options
-- (void)controller:(RWSearchViewController *)controller didFinishWithSearchString:(NSString *)string options:(NSDictionary *)options;
+- (void)controller:(RWSearchViewController *)controller didFinishWithSearchString:(NSString *)string options:(NSDictionary *)options replacement:(NSString *)replacement;
 
 @end

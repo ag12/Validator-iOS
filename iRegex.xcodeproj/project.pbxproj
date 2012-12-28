@@ -30,6 +30,9 @@
 		6DA5B5EE166AA5780007B2A5 /* RWSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5B5ED166AA5780007B2A5 /* RWSecondViewController.m */; };
 		6DA5B5F0166AA5780007B2A5 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5B5EF166AA5780007B2A5 /* second.png */; };
 		6DA5B5F2166AA5780007B2A5 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5B5F1166AA5780007B2A5 /* second@2x.png */; };
+		6DE181A11687A7D700D9FA73 /* RWThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE181A01687A7D700D9FA73 /* RWThirdViewController.m */; };
+		6DE181A51687AB9800D9FA73 /* third.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE181A31687AB9800D9FA73 /* third.png */; };
+		6DE181A61687AB9800D9FA73 /* third@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE181A41687AB9800D9FA73 /* third@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +66,10 @@
 		6DA5B5ED166AA5780007B2A5 /* RWSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RWSecondViewController.m; sourceTree = "<group>"; };
 		6DA5B5EF166AA5780007B2A5 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		6DA5B5F1166AA5780007B2A5 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		6DE1819F1687A7D700D9FA73 /* RWThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWThirdViewController.h; sourceTree = "<group>"; };
+		6DE181A01687A7D700D9FA73 /* RWThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWThirdViewController.m; sourceTree = "<group>"; };
+		6DE181A31687AB9800D9FA73 /* third.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = third.png; sourceTree = "<group>"; };
+		6DE181A41687AB9800D9FA73 /* third@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,16 +125,11 @@
 				6DA5B5E6166AA5780007B2A5 /* RWFirstViewController.m */,
 				6D41E7871676DF46001199BA /* RWSearchViewController.h */,
 				6D41E7881676DF46001199BA /* RWSearchViewController.m */,
-				6DA5B5E8166AA5780007B2A5 /* first.png */,
-				6DA5B5EA166AA5780007B2A5 /* first@2x.png */,
 				6DA5B5EC166AA5780007B2A5 /* RWSecondViewController.h */,
 				6DA5B5ED166AA5780007B2A5 /* RWSecondViewController.m */,
-				6DA5B5EF166AA5780007B2A5 /* second.png */,
-				6DA5B5F1166AA5780007B2A5 /* second@2x.png */,
-				6D41E78F167829A6001199BA /* exclamation@2x.png */,
-				6D41E791167829B1001199BA /* exclamation.png */,
-				6D41E79316782CE5001199BA /* checkmark.png */,
-				6D41E79416782CE5001199BA /* checkmark@2x.png */,
+				6DE1819F1687A7D700D9FA73 /* RWThirdViewController.h */,
+				6DE181A01687A7D700D9FA73 /* RWThirdViewController.m */,
+				6DE181A71687ABA300D9FA73 /* Images */,
 				6DA5B5D1166AA5780007B2A5 /* Supporting Files */,
 			);
 			path = iRegex;
@@ -145,6 +147,23 @@
 				6DA5B5E0166AA5780007B2A5 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DE181A71687ABA300D9FA73 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5B5E8166AA5780007B2A5 /* first.png */,
+				6DA5B5EA166AA5780007B2A5 /* first@2x.png */,
+				6DA5B5EF166AA5780007B2A5 /* second.png */,
+				6DA5B5F1166AA5780007B2A5 /* second@2x.png */,
+				6DE181A31687AB9800D9FA73 /* third.png */,
+				6DE181A41687AB9800D9FA73 /* third@2x.png */,
+				6D41E78F167829A6001199BA /* exclamation@2x.png */,
+				6D41E791167829B1001199BA /* exclamation.png */,
+				6D41E79316782CE5001199BA /* checkmark.png */,
+				6D41E79416782CE5001199BA /* checkmark@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +233,8 @@
 				6D41E79616782CE5001199BA /* checkmark@2x.png in Resources */,
 				6D41E799167837C9001199BA /* RWIcon.png in Resources */,
 				6D41E79A167837C9001199BA /* RWIcon@2x.png in Resources */,
+				6DE181A51687AB9800D9FA73 /* third.png in Resources */,
+				6DE181A61687AB9800D9FA73 /* third@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +250,7 @@
 				6DA5B5E7166AA5780007B2A5 /* RWFirstViewController.m in Sources */,
 				6DA5B5EE166AA5780007B2A5 /* RWSecondViewController.m in Sources */,
 				6D41E7891676DF46001199BA /* RWSearchViewController.m in Sources */,
+				6DE181A11687A7D700D9FA73 /* RWThirdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
