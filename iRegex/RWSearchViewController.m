@@ -47,6 +47,7 @@
         
         BOOL isReplace = [[self.options objectForKey:KRWReplacementKey] boolValue];
         [self.replaceSwitch setOn:isReplace];
+        self.replaceTextField.enabled = isReplace;
     }
     else
     {
@@ -92,7 +93,10 @@
 - (IBAction)searchButtonTapped:(id)sender
 {
     self.searchString = self.searchTextField.text;
-    self.replacementString = self.replaceTextField.text;
+    
+    if (self.replaceTextField.enabled)
+        self.replacementString = self.replaceTextField.text;
+    
     self.searchOptions = self.options.copy;
     [self closeButtonTapped:nil];
 }
@@ -125,7 +129,10 @@
     // in self.replacementString, we don't want to pass it back to the
     // delegate.
     if (!theSwitch.isOn)
+    {
         self.replacementString = nil;
+        self.replaceTextField.text = nil;
+    }
 }
 
 - (IBAction)dimissKeyboard:(id)sender

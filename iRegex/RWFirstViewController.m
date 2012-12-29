@@ -36,6 +36,7 @@
         controller.delegate = self;
         controller.searchString = self.lastSearchString;
         controller.searchOptions = self.lastSearchOptions;
+        controller.replacementString = self.lastReplacementString;
     }
 }
 

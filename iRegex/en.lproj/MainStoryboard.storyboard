@@ -258,7 +258,7 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
                                                         <constraint firstAttribute="height" constant="30" id="dxz-uM-Mrs"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="tKH-IK-Byd" id="Ahs-MT-9Co"/>
                                                     </connections>
@@ -272,7 +272,7 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vo4-0z-1AL">
-                                        <rect key="frame" x="0.0" y="91" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="91" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -284,7 +284,7 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
                                                         <constraint firstAttribute="width" constant="150" id="s7X-2U-k43"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="tKH-IK-Byd" id="sIj-c8-dCZ"/>
                                                     </connections>
