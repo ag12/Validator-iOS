@@ -21,10 +21,8 @@
 
 @implementation RWSearchViewController
 
-
 #pragma mark
 #pragma mark - View life cycle
-
 
 - (void)viewDidLoad
 {
@@ -64,6 +62,7 @@
         
         NSNumber *isReplace = [NSNumber numberWithBool:self.replaceSwitch.isOn];
         [self.options setObject:isReplace forKey:KRWReplacementKey];
+        self.replaceTextField.enabled = isReplace.boolValue;
     }
     
     // Dismiss the keyboard if user double taps on the background
@@ -75,10 +74,8 @@
     [super viewDidLoad];
 }
 
-
 #pragma mark
 #pragma mark - IBActions
-
 
 - (IBAction)closeButtonTapped:(id)sender
 {
@@ -92,13 +89,11 @@
     }];
 }
 
-
 - (IBAction)searchButtonTapped:(id)sender
 {
     self.searchString = self.searchTextField.text;
     self.replacementString = self.replaceTextField.text;
     self.searchOptions = self.options.copy;
-    
     [self closeButtonTapped:nil];
 }
 
@@ -111,14 +106,12 @@
     [self.options setObject:isCaseSensitive forKey:kRWSearchCaseSensitiveKey];
 }
 
-
 - (IBAction)wholeWordsSwitchToggled:(id)sender
 {
     UISwitch *theSwitch = (UISwitch *)sender;
     NSNumber *isMatchWord = [NSNumber numberWithBool:theSwitch.isOn];
     [self.options setObject:isMatchWord forKey:kRWSearchWholeWordsKey];
 }
-
 
 - (IBAction)replaceSwitchToggled:(id)sender
 {
@@ -135,7 +128,6 @@
         self.replacementString = nil;
 }
 
-
 - (IBAction)dimissKeyboard:(id)sender
 {
     [self.searchTextField resignFirstResponder];
@@ -143,7 +135,6 @@
 
 #pragma mark
 #pragma mark - UITextField delegates
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

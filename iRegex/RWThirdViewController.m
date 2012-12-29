@@ -14,13 +14,12 @@
 
 @implementation RWThirdViewController
 
+
 #pragma mark
 #pragma mark - View life cycle
 
-
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     [self.SSNTextField becomeFirstResponder];
     
     // For convenience, if user double tapps anywhere on the view
@@ -29,12 +28,15 @@
     doubleTap.numberOfTapsRequired = 2;
     doubleTap.numberOfTouchesRequired = 1;
     [self.tableView addGestureRecognizer:doubleTap];
+    
+    [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
     [self validateTextField:self.SSNTextField];
+    
+    [super viewWillAppear:animated];
 }
 
 #pragma mark
@@ -88,10 +90,6 @@
     
     return shouldReplace;
 }
-
-#pragma mark
-#pragma mark - Helper methods
-
 
 #pragma mark
 #pragma mark - Validation

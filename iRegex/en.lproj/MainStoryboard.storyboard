@@ -291,7 +291,7 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ggw-MS-Qo5">
                                                     <connections>
-                                                        <action selector="replaceSwitchToggled:" destination="tKH-IK-Byd" eventType="editingChanged" id="qlt-uJ-loG"/>
+                                                        <action selector="replaceSwitchToggled:" destination="tKH-IK-Byd" eventType="valueChanged" id="96v-fo-ay9"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>

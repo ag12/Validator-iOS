@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *dateOfBirthTextField;
 @end
 
+
 @implementation RWSecondViewController
 
 #pragma mark
@@ -24,8 +25,6 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
     // Keep an array of text field to make it
     // first responder upon tapping on next button
 	self.textFields = @[self.firstNameTextField,
@@ -47,6 +46,8 @@
     doubleTap.numberOfTapsRequired = 2;
     doubleTap.numberOfTouchesRequired = 1;
     [self.tableView addGestureRecognizer:doubleTap];
+    
+    [super viewDidLoad];
 }
 
 #pragma mark
