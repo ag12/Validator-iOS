@@ -495,7 +495,7 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
             </objects>
             <point key="canvasLocation" x="653" y="1238"/>
         </scene>
-        <!--Third View Controller-->
+        <!--Third View Controller - Verfication-->
         <scene sceneID="dKh-KD-axP">
             <objects>
                 <tableViewController id="0iW-Bc-Vps" customClass="RWThirdViewController" sceneMemberID="viewController">
@@ -541,7 +541,7 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
                             <outlet property="delegate" destination="0iW-Bc-Vps" id="Ikx-Kg-Gr9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NcS-0i-38j"/>
+                    <navigationItem key="navigationItem" title="Verfication" id="NcS-0i-38j"/>
                     <connections>
                         <outlet property="SSNTextField" destination="Hg0-c1-mwM" id="C1b-cj-ZIS"/>
                     </connections>
