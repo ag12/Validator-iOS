@@ -41,6 +41,16 @@
 }
 
 #pragma mark
+#pragma mark - IBActions
+
+- (IBAction)findInterestingData:(id)sender
+{
+    [self underlineAllDates];
+    [self underlineAllTimes];
+    [self underlineAllLocations];
+}
+
+#pragma mark
 #pragma mark - RWSearchViewController delegate
 
 - (void)controller:(RWSearchViewController *)controller didFinishWithSearchString:(NSString *)string options:(NSDictionary *)options replacement:(NSString *)replacement
@@ -67,7 +77,7 @@
 }
 
 #pragma mark
-#pragma mark - Manage search
+#pragma mark - Manage search to find and replace
 
 // Search for a searchString in the given text view with search options
 - (void)searchText:(NSString *)searchString inTextView:(UITextView *)textView options:(NSDictionary *)options
@@ -111,7 +121,7 @@
     CFAttributedStringReplaceAttributedString((__bridge CFMutableAttributedStringRef)(textViewAttributedString), visibleRange_CF, (__bridge CFAttributedStringRef)(visibleAttributedText));
     
     // Update UI
-    textView.attributedText = textViewAttributedString;;
+    textView.attributedText = textViewAttributedString;
 }
 
 // Search for a searchString and replace it with the replacementString in the given text view with search options
@@ -133,6 +143,29 @@
     // Update UI
     textView.text = textViewText;
 }
+
+#pragma mark
+#pragma mark - UIScrollView delegate
+
+// Called when the user finishes scrolling the content
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    if (CGPointEqualToPoint(velocity, CGPointZero))
+    {
+        if (self.lastSearchString && self.lastSearchOptions)
+            [self searchText:self.lastSearchString inTextView:self.textView options:self.lastSearchOptions];
+    }
+}
+
+// Called when the scroll view has ended decelerating the scrolling movement
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (self.lastSearchString && self.lastSearchOptions)
+        [self searchText:self.lastSearchString inTextView:self.textView options:self.lastSearchOptions];
+}
+
+#pragma mark
+#pragma mark - Helper methods
 
 // Create a regular expression with given string and options
 - (NSRegularExpression *)regularExpressionWithString:(NSString *)string options:(NSDictionary *)options
@@ -174,29 +207,6 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
     return contains;
 }
 
-#pragma mark
-#pragma mark - UIScrollView delegate
-
-// Called when the user finishes scrolling the content
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    if (CGPointEqualToPoint(velocity, CGPointZero))
-    {
-        if (self.lastSearchString && self.lastSearchOptions)
-            [self searchText:self.lastSearchString inTextView:self.textView options:self.lastSearchOptions];
-    }
-}
-
-// Called when the scroll view has ended decelerating the scrolling movement
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    if (self.lastSearchString && self.lastSearchOptions)
-        [self searchText:self.lastSearchString inTextView:self.textView options:self.lastSearchOptions];
-}
-
-#pragma mark
-#pragma mark - Highlighting the text in UITextView
-
 // Remove all highlighted text (the background color) of NSAttributedString
 // in a given UITextView
 - (void)removeAllHighlightedTextInTextView:(UITextView *)textView
@@ -207,5 +217,61 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
     textView.attributedText = mutableAttributedString.copy;
 }
 
+#pragma mark
+#pragma mark - Find interesting data
+
+- (void)underlineAllDates
+{
+    NSError *error = NULL;
+    NSString *pattern = @"(\\d+[-/.]\\d+[-/.]\\d+)|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\\s*\\d+(st|nd|rd|th)?+[,]\\s*\\d+";
+    NSString *string = self.textView.text;
+    NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
+    NSRange range = NSMakeRange(0, string.length);
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
+    for (NSTextCheckingResult *match in matches)
+    {
+        NSRange matchRange = match.range;
+        [mutableAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:matchRange];
+        [mutableAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
+    }
+    self.textView.attributedText = mutableAttributedString.copy;
+}
+
+- (void)underlineAllTimes
+{
+    NSError *error = NULL;
+    NSString *pattern = @"\\d+(pm|am)";
+    NSString *string = self.textView.text;
+    NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
+    NSRange range = NSMakeRange(0, string.length);
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
+    for (NSTextCheckingResult *match in matches)
+    {
+        NSRange matchRange = match.range;
+        [mutableAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:matchRange];
+        [mutableAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
+    }
+    self.textView.attributedText = mutableAttributedString.copy;
+}
+
+- (void)underlineAllLocations
+{
+    NSError *error = NULL;
+    NSString *pattern = @"[a-zA-Z]+[,]\\s*([A-Z]{2})";
+    NSString *string = self.textView.text;
+    NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
+    NSRange range = NSMakeRange(0, string.length);
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
+    NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
+    for (NSTextCheckingResult *match in matches)
+    {
+        NSRange matchRange = match.range;
+        [mutableAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:matchRange];
+        [mutableAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
+    }
+    self.textView.attributedText = mutableAttributedString.copy;
+}
 
 @end

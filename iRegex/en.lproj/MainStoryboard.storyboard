@@ -16,7 +16,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">This is a blog post by site administrator Ray Wenderlich, an independent software developer and gamer.
+                                        <string key="content">I wanted to be born on Jan 1, 1980 in Washington,DC but instead I was born on March 3rd,  1981 in Boston, MA. I went home on Apr 10th, 1982 at 9 am and screamed 2 hours till 11am on 4/10/82. On july6,1985 my sister was born at 10pm and screamed till 11am 07/07/1986 in Manchester, NH.
+
+
+This is a blog post by site administrator Ray Wenderlich, an independent software developer and gamer.
 A while back on the weekly tutorial poll on the sidebar, you guys voted for a tutorial on In-App Purchases: consumables and receipt validation. As always, your wish is my command! :]
 This tutorial picks up where we left things off in our previous In-App Purchases tutorial. As a reminder, in that tutorial we developed an app called “In App Rage” where customers could purchase rage face comics as non-consumable In-App purchases.
 In this tutorial, you will extend the app to add a new consumable In-App Purchase – after all, those are often way more lucrative than non-consumables, since customers can purchase them more than once! You will also add receipt validation to add some extra security into the app.
@@ -84,6 +87,11 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Text View" id="Jcp-w5-CWg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="3ug-JS-T4Z">
+                            <connections>
+                                <action selector="findInterestingData:" destination="2" id="nA9-gS-gPV"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Fu9-A8-ys6">
                             <connections>
                                 <segue destination="KRF-Iy-DBG" kind="modal" identifier="RWSearchViewControllerSegue" id="UIe-J3-Eca"/>
@@ -563,6 +571,7 @@ To begin, open RageIAPHelper.m and add the new product identifier you jsut creat
         <class className="RWFirstViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RWFirstViewController.h"/>
             <relationships>
+                <relationship kind="action" name="findInterestingData:"/>
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="editBarButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="searchBarButton" candidateClass="UIBarButtonItem"/>
