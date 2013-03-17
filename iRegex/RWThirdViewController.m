@@ -8,6 +8,8 @@
 
 #import "RWThirdViewController.h"
 
+#define kSocialSecuityNumberPattern @"^\\d{3}[-]\\d{2}[-]\\d{4}$"
+
 @interface RWThirdViewController() <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *SSNTextField;
 @end
@@ -112,9 +114,6 @@
     }
     else
     {
-        // Get the validation pattern
-        NSString *validationPattern = @"^\\d{3}[-]\\d{2}[-]\\d{4}$";
-        
         // By default, the right view is nil. If it is nil, it means it the first time
         // we are doing validation on this field, so create an image view and put it there.
         if (!rightView)
@@ -125,7 +124,7 @@
         }
         
         // Perform the validation
-        BOOL didValidate = [self validateString:text withPattern:validationPattern];
+        BOOL didValidate = [self validateString:text withPattern:kSocialSecuityNumberPattern];
         
         // Base on whether it validates or not, provide a feedback in UI
         if (didValidate)

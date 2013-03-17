@@ -82,35 +82,35 @@
 // Search for a searchString in the given text view with search options
 - (void)searchText:(NSString *)searchString inTextView:(UITextView *)textView options:(NSDictionary *)options
 {
-    // Range of visible text
+    // 1: Range of visible text
     NSRange visibleRange = [self visibleRangeOfTextView:self.textView];
     
-    // Get a mutable sub-range of attributed string of the text view that is visible
+    // 2: Get a mutable sub-range of attributed string of the text view that is visible
     NSMutableAttributedString *visibleAttributedText = [textView.attributedText attributedSubstringFromRange:visibleRange].mutableCopy;
     
     // Get the string of the attributed text
     NSString *visibleText = visibleAttributedText.string;
     
-    // Create a new range for the visible text. This is different
+    // 3: Create a new range for the visible text. This is different
     // from visibleRange. VisibleRange is a portion of all textView that is visible, but
     // visibileTextRange is only for visibleText, so it starts at 0 and its length is
     // the length of visibleText
     NSRange visibleTextRange = NSMakeRange(0, visibleText.length);
     
-    // Call the convenient method to create a regex for us with the options we have
+    // 4: Call the convenient method to create a regex for us with the options we have
     NSRegularExpression *regex = [self regularExpressionWithString:searchString options:options];
     
-    // Find matches
+    // 5: Find matches
     NSArray *matches = [regex matchesInString:visibleText options:NSMatchingProgress range:visibleTextRange];
     
-    // Iterate through the matches and highlight them
+    // 6: Iterate through the matches and highlight them
     for (NSTextCheckingResult *match in matches)
     {
         NSRange matchRange = match.range;
         [visibleAttributedText addAttribute:NSBackgroundColorAttributeName value:[UIColor yellowColor] range:matchRange];
     }
     
-    // Replace the range of the attributed string that we just highlighted
+    // 7: Replace the range of the attributed string that we just highlighted
     // First, create a CFRange from the NSRange of the visible range
     CFRange visibleRange_CF = CFRangeMake(visibleRange.location, visibleRange.length);
     
@@ -120,39 +120,39 @@
     // Replace the visible range
     CFAttributedStringReplaceAttributedString((__bridge CFMutableAttributedStringRef)(textViewAttributedString), visibleRange_CF, (__bridge CFAttributedStringRef)(visibleAttributedText));
     
-    // Update UI
+    // 8: Update UI
     textView.attributedText = textViewAttributedString;
 }
 
 // Search for a searchString and replace it with the replacementString in the given text view with search options
 - (void)searchAndReplaceText:(NSString *)searchString withText:(NSString *)replacementString inTextView:(UITextView *)textView options:(NSDictionary *)options
 {
-    // Create a mutable copy the text content of the text view
-    NSMutableString *textViewText = textView.text.mutableCopy;
+    // Text before replacement
+    NSString *beforeText = textView.text;
     
     // Create a range for it. We do the replacement on the whole
     // range of the text view, not only a portion of it.
-    NSRange textViewRange = NSMakeRange(0, textViewText.length);
+    NSRange range = NSMakeRange(0, beforeText.length);
     
     // Call the convenient method to create a regex for us with the options we have
     NSRegularExpression *regex = [self regularExpressionWithString:searchString options:options];
     
     // Call the NSRegularExpression method to do the replacement for us
-    [regex replaceMatchesInString:textViewText options:NSMatchingProgress range:textViewRange withTemplate:replacementString];
+    NSString *afterText = [regex stringByReplacingMatchesInString:beforeText options:0 range:range withTemplate:replacementString];
     
     // Update UI
-    textView.text = textViewText;
+    textView.text = afterText;
 }
 
 #pragma mark
-#pragma mark - UIScrollView delegate
+#pragma mark - UIScrollView delegate methods
 
 // Called when the user finishes scrolling the content
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     if (CGPointEqualToPoint(velocity, CGPointZero))
     {
-        if (self.lastSearchString && self.lastSearchOptions)
+        if (self.lastSearchString && self.lastSearchOptions && !self.lastReplacementString)
             [self searchText:self.lastSearchString inTextView:self.textView options:self.lastSearchOptions];
     }
 }
@@ -160,7 +160,7 @@
 // Called when the scroll view has ended decelerating the scrolling movement
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (self.lastSearchString && self.lastSearchOptions)
+    if (self.lastSearchString && self.lastSearchOptions && !self.lastReplacementString)
         [self searchText:self.lastSearchString inTextView:self.textView options:self.lastSearchOptions];
 }
 
@@ -181,6 +181,10 @@
     NSString *pattern = [NSString stringWithFormat:placeholder, string];
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
+    if (error)
+    {
+        NSLog(@"Couldn't create regex with given string and options");
+    }
     
     return regex;
 }
@@ -212,8 +216,8 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
 - (void)removeAllHighlightedTextInTextView:(UITextView *)textView
 {
     NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
-    NSRange wholeRane = NSMakeRange(0, mutableAttributedString.length);
-    [mutableAttributedString addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:wholeRane];
+    NSRange wholeRange = NSMakeRange(0, mutableAttributedString.length);
+    [mutableAttributedString addAttribute:NSBackgroundColorAttributeName value:[UIColor clearColor] range:wholeRange];
     textView.attributedText = mutableAttributedString.copy;
 }
 
@@ -223,37 +227,23 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
 - (void)underlineAllDates
 {
     NSError *error = NULL;
-    NSString *pattern = @"(\\d+[-/.]\\d+[-/.]\\d+)|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\\s*\\d+(st|nd|rd|th)?+[,]\\s*\\d+";
+    NSString *pattern = @"(\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{1,2})|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\\s*\\d{1,2}(st|nd|rd|th)?+[,]\\s*\\d{4}";
     NSString *string = self.textView.text;
-    NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
     NSRange range = NSMakeRange(0, string.length);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
     NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
-    for (NSTextCheckingResult *match in matches)
-    {
-        NSRange matchRange = match.range;
-        [mutableAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:matchRange];
-        [mutableAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
-    }
-    self.textView.attributedText = mutableAttributedString.copy;
+    [self highlightMatches:matches];
 }
 
 - (void)underlineAllTimes
 {
     NSError *error = NULL;
-    NSString *pattern = @"\\d+(pm|am)";
+    NSString *pattern = @"\\d{1,2}\\s*(pm|am)";
     NSString *string = self.textView.text;
-    NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
     NSRange range = NSMakeRange(0, string.length);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
     NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
-    for (NSTextCheckingResult *match in matches)
-    {
-        NSRange matchRange = match.range;
-        [mutableAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:matchRange];
-        [mutableAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
-    }
-    self.textView.attributedText = mutableAttributedString.copy;
+    [self highlightMatches:matches];
 }
 
 - (void)underlineAllLocations
@@ -261,16 +251,28 @@ bool NSRangeContainsRange (NSRange range1, NSRange range2)
     NSError *error = NULL;
     NSString *pattern = @"[a-zA-Z]+[,]\\s*([A-Z]{2})";
     NSString *string = self.textView.text;
-    NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
     NSRange range = NSMakeRange(0, string.length);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
     NSArray *matches = [regex matchesInString:string options:NSMatchingProgress range:range];
-    for (NSTextCheckingResult *match in matches)
-    {
-        NSRange matchRange = match.range;
-        [mutableAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:matchRange];
-        [mutableAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
-    }
+    [self highlightMatches:matches];
+}
+
+// Matches is an array with object of type NSTextCheckingResult
+- (void)highlightMatches:(NSArray *)matches
+{
+    __block NSMutableAttributedString *mutableAttributedString = self.textView.attributedText.mutableCopy;
+    
+    [matches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        if ([obj isKindOfClass:[NSTextCheckingResult class]])
+        {
+            NSTextCheckingResult *match = (NSTextCheckingResult *)obj;
+            NSRange matchRange = match.range;
+            [mutableAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:matchRange];
+            [mutableAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
+        }
+    }];
+    
     self.textView.attributedText = mutableAttributedString.copy;
 }
 

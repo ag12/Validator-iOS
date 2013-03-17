@@ -34,9 +34,9 @@
                         ];
     
     // Array of regex to validate each field
-    self.validations = @[@"^[a-zA-Z]{1,10}$", // First name
-                         @"^[A-Z]$", // Middle name
-                         @"^[a-zA-Z']{2,10}$", // Last name
+    self.validations = @[@"^[a-z]{1,10}$", // First name
+                         @"^[a-z]$", // Middle initial
+                         @"^[a-z']{2,10}$", // Last name
                          @"^(0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19|20)\\d\\d$", // Date of birth
                          ];
     
@@ -130,7 +130,7 @@
 
 // Trim the input string by removing leading and trailing white spaces
 // and return the result
-- (NSString *)stringTrimmedForLeadingAndTrailingWhiteFromString:(NSString *)string
+- (NSString *)stringTrimmedForLeadingAndTrailingWhiteSpacesFromString:(NSString *)string
 {
     NSString *leadingTrailingWhiteSpacesPattern = @"(?:^\\s+)|(?:\\s+$)";
     
@@ -167,7 +167,7 @@
         // We have a text...
         // Before we start, in our design, we want to ignore leading and trailing whitespaces,
         // so trim the text field text and remove leading and trailing whitespaces and update UI
-        NSString *trimmedText = [self stringTrimmedForLeadingAndTrailingWhiteFromString:text];
+        NSString *trimmedText = [self stringTrimmedForLeadingAndTrailingWhiteSpacesFromString:text];
         textField.text = trimmedText;
         
         // Do the validation on the trimmed text
